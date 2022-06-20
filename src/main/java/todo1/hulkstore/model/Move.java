@@ -4,22 +4,23 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "PRODUCT")
-public class Product {
+@Table(name = "MOVE")
+public class Move {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private long id;
-    private String name;
-    private String description;
-    private double price;
-    private double amount;
+    private Long id;
 
-    //@ManyToOne
-    //private Inventory inventory;
+    @OneToMany
+    private List<Product> products;
+
+    private String type;
+    private String description;
+
 
 }

@@ -29,6 +29,12 @@ public class ProductController {
         return new ResponseEntity(productCreated, HttpStatus.CREATED);
     }
 
+    @PutMapping(value = "/updateProduct")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product){
+        Product updatedProduct = productService.updateProduct(product);
+        return new ResponseEntity(updatedProduct, HttpStatus.CREATED);
+    }
+
     @RequestMapping(value = "/get/{productId}", method = RequestMethod.GET)
     public ResponseEntity<Product> productById(@PathVariable long productId){
         Optional<Product> product = productService.getOne(productId);
@@ -44,5 +50,13 @@ public class ProductController {
     public void deleteAll() {
         productService.deleteAllProducts();
     }
+
+    @RequestMapping(value = "/inventory", method = RequestMethod.GET)
+    public ResponseEntity<Product> inventario() {
+        List<Product> products = productService.getAllProducts();
+        return new ResponseEntity(products, HttpStatus.OK);
+    }
+
+
 
 }
